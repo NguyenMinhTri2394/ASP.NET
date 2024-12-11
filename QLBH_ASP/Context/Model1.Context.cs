@@ -13,10 +13,10 @@ namespace QLBH_ASP.Context
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QLBH_ASPEntities : DbContext
+    public partial class WebsiteBanHangEntities : DbContext
     {
-        public QLBH_ASPEntities()
-            : base("name=QLBH_ASPEntities")
+        public WebsiteBanHangEntities()
+            : base("name=WebsiteBanHangEntities")
         {
         }
     
@@ -25,6 +25,11 @@ namespace QLBH_ASP.Context
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -9,12 +9,13 @@ namespace QLBH_ASP.Controllers
 {
     public class HomeController : Controller
     {
-        QLBH_ASPEntities objQLBH_ASPEntities = new QLBH_ASPEntities();
+        WebsiteBanHangEntities objWebsiteBanHangEntities = new WebsiteBanHangEntities();
 
         public ActionResult Index()
         {
-            var lstProduct = objQLBH_ASPEntities.Products.ToList();
-            return View(lstProduct);
+            var lstCategory = objWebsiteBanHangEntities.Categories.ToList();
+
+            return View(lstCategory);
         }
 
         public ActionResult About()

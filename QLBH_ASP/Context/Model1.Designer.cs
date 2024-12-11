@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\ASP\QLBH_ASP\QLBH_ASP\Context\dbModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\Context\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
