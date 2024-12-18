@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QLBH_ASP.Context;
+using QLBH_ASP.Models;
 
 namespace QLBH_ASP.Controllers
 {
@@ -13,9 +14,13 @@ namespace QLBH_ASP.Controllers
 
         public ActionResult Index()
         {
-            var lstCategory = objWebsiteBanHangEntities.Categories.ToList();
+            HomeModel objHomeModel = new HomeModel();
 
-            return View(lstCategory);
+            objHomeModel.ListCategory = objWebsiteBanHangEntities.Categories.ToList();
+
+            objHomeModel.ListProduct = objWebsiteBanHangEntities.Products.ToList();
+
+            return View(objHomeModel);
         }
 
         public ActionResult About()
