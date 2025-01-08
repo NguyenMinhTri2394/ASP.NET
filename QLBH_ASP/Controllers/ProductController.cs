@@ -9,12 +9,17 @@ namespace QLBH_ASP.Controllers
 {
     public class ProductController : Controller
     {
-        WebsiteBanHangEntities objWebsiteBanHangEntities = new WebsiteBanHangEntities();
+        WebsiteBanHangEntities4 objWebsiteBanHangEntities = new WebsiteBanHangEntities4();
         // GET: Product
         public ActionResult Detail(int Id)
         {
             var objProduct = objWebsiteBanHangEntities.Products.Where(n => n.Id == Id).FirstOrDefault();
             return View(objProduct);
+        }
+
+        public ActionResult AllProduct()
+        {
+            return View();
         }
     }
 }

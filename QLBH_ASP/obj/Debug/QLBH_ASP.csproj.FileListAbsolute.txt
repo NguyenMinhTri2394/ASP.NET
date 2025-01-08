@@ -159,8 +159,8 @@ C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\bin\System.Web.WebPages.Razor.xml
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\bin\Newtonsoft.Json.xml
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\bin\Antlr3.Runtime.pdb
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\obj\Debug\QLBH_ASP.csproj.AssemblyReference.cache
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\obj\Debug\QLBH_ASP.csproj.CoreCompileInputs.cache
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\obj\Debug\QLBH_ASP.csproj.CopyComplete
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\obj\Debug\QLBH_ASP.dll
 C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\obj\Debug\QLBH_ASP.pdb
+C:\Users\minhtri\Desktop\ASP.NET\QLBH_ASP\obj\Debug\QLBH_ASP.csproj.AssemblyReference.cache

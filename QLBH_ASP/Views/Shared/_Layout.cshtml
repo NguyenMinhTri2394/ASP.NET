@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -54,14 +54,27 @@
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="widgets-wrap float-md-right">
                             <div class="widget-header mr-3">
-                                <a href="#" class="widget-view">
-                                    <div class="icon-area">
-                                        <i class="fa fa-user"></i>
-                                        <span class="notify">3</span>
-                                    </div>
-                                    <small class="text"> My profile </small>
-                                </a>
-                            </div>
+                                @if (Session["idUser"] != null)
+                                {
+                                    <a href="@Url.Action("Index", "Profile")" class="widget-view">
+                                        <div class="icon-area">
+                                            <i class="fa fa-user"></i>
+                                            <span class="notify">3</span>
+                                        </div>
+                                        <small class="text"> @Session["FullName"] </small>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "User")" class="widget-view">
+                                        <div class="icon-area">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <small class="text"> Login </small>
+                                    </a>
+                                }
+
+                                </div>
                             <div class="widget-header mr-3">
                                 <a href="#" class="widget-view">
                                     <div class="icon-area">
@@ -81,11 +94,24 @@
                             </div>
                             <div class="widget-header">
                                 <a href="@Url.Action("Cart", "Cart")" class="widget-view">
-                                    <div class="icon-area">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </div>
-                                    <small class="text"> Cart </small>
-                                </a>
+                                
+
+
+                                    @if (Session["count"] != null && Convert.ToInt32(Session["count"]) > 0)
+                                    {
+                                        <div class="icon-area">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="notify" id="CartCount">@Session["count"]</span>
+                                        </div>
+                                        }
+                                         else {
+                                            <div class="icon-area">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </div>
+                                    }
+
+                                        <small class="text"> Cart </small>
+                                    </a>
                             </div>
                         </div> <!-- widgets-wrap.// -->
                     </div> <!-- col.// -->
@@ -104,16 +130,7 @@
                 <div class="collapse navbar-collapse" id="main_nav">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bars text-muted mr-2"></i> Categories </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Machinery</a>
-                                <a class="dropdown-item" href="#">Electronics</a>
-                                <a class="dropdown-item" href="#">Home textile</a>
-                                <a class="dropdown-item" href="#">Home and kitchen</a>
-                                <a class="dropdown-item" href="#">Service and equipment</a>
-                                <a class="dropdown-item" href="#">Healthcare items</a>
-                                <a class="dropdown-item" href="#">Toys and Hobbies</a>
-                            </div>
+                            <a class="nav-link" href="@Url.Action("AllCategory", "Category")">Categories</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Ready to ship</a>

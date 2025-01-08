@@ -10,15 +10,24 @@ namespace QLBH_ASP.Controllers
 {
     public class HomeController : Controller
     {
-        WebsiteBanHangEntities objWebsiteBanHangEntities = new WebsiteBanHangEntities();
+        WebsiteBanHangEntities4 objWebsiteBanHangEntities = new WebsiteBanHangEntities4();
 
         public ActionResult Index()
         {
+            // Kiểm tra trạng thái đăng nhập
+            if (Session["isUser"] != null && (bool)Session["isUser"])
+            {
+                ViewBag.Message = "Welcome " + Session["FullName"];
+            }
+            else
+            {
+                ViewBag.Message = "You are not logged in.";
+            }
+
+            // Chuẩn bị dữ liệu cho HomeModel
             HomeModel objHomeModel = new HomeModel();
-
-            objHomeModel.ListCategory = objWebsiteBanHangEntities.Categories.ToList();
-
             objHomeModel.ListProduct = objWebsiteBanHangEntities.Products.ToList();
+            objHomeModel.ListCategory = objWebsiteBanHangEntities.Categories.ToList();
 
             return View(objHomeModel);
         }

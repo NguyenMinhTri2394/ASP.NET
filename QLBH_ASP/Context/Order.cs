@@ -20,5 +20,7 @@ namespace QLBH_ASP.Context
         public Nullable<double> Price { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> CreatedOnUtc { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

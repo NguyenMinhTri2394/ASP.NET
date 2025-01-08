@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLBH_ASP.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +9,22 @@ namespace QLBH_ASP.Controllers
 {
     public class CategoryController : Controller
     {
+        WebsiteBanHangEntities4 objWebsiteBanHangEntities = new WebsiteBanHangEntities4();
+
         // GET: Category
         public ActionResult AllCategory()
         {
-            return View();
+            var lstCategory = objWebsiteBanHangEntities.Categories.ToList();
+            return View(lstCategory);
         }
 
+
+
         // GET: Category
-        public ActionResult ProductByCategory()
+        public ActionResult ProductByCategory(int id)
         {
-            return View();
+            var listProduct = objWebsiteBanHangEntities.Products.Where(n => n.CategoryId == id).ToList();
+            return View(listProduct);
         }
     }
 }
