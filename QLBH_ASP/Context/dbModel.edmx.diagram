@@ -13,6 +13,9 @@
         <AssociationConnector Association="WebsiteBanHangModel.FK_Product_Brand" ManuallyRouted="false" />
         <AssociationConnector Association="WebsiteBanHangModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="WebsiteBanHangModel.FK_Order_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebsiteBanHangModel.sysdiagram" Width="1.5" PointX="3.375" PointY="8.75" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__Order_Det__Order__73BA3083" />
+        <AssociationConnector Association="WebsiteBanHangModel.FK__Order_Det__Produ__74AE54BC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

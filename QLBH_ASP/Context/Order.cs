@@ -14,6 +14,12 @@ namespace QLBH_ASP.Context
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.Order_Detail = new HashSet<Order_Detail>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> ProductId { get; set; }
@@ -22,5 +28,7 @@ namespace QLBH_ASP.Context
         public Nullable<System.DateTime> CreatedOnUtc { get; set; }
     
         public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Detail> Order_Detail { get; set; }
     }
 }

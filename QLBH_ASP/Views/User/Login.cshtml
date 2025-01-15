@@ -7,7 +7,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                Login
+                ĐĂNG NHẬP
             </div>
             <div class="card-body">
                 @using (Html.BeginForm("Login", "User", FormMethod.Post))
@@ -20,16 +20,14 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="submit" class="btn btn-primary" value="Login" />
-                        <button class="btn btn-success " style="margin-left: 220px;">
-                            <a href="@Url.Action("Register", "User")">Register</a>
+                        <input type="submit" name="submit" class="btn btn-primary" value="Đăng nhập" />
+                        <button class="btn btn-success " style="margin-left: 180px;">
+                            <a href="@Url.Action("Register", "User")" class="text-white">Đăng ký</a>
                         </button>
                     </div>
-
-
                 }
             </div>
         </div>

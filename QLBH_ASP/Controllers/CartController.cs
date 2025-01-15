@@ -12,7 +12,7 @@ namespace QLBH_ASP.Controllers
     {
         WebsiteBanHangEntities4 objWebsiteBanHangEntities = new WebsiteBanHangEntities4();
 
-        public ActionResult Cart()
+        public ActionResult Shopping()
         {
             var cart = Session["Cart"] as List<CartModel>;
 
@@ -68,6 +68,15 @@ namespace QLBH_ASP.Controllers
                 if (cart[i].Product.Id.Equals(id))
                     return i;
             return -1;
+        }
+
+        public ActionResult Remove(int Id)
+        {
+            List<CartModel> li = (List<CartModel>)Session["cart"];
+            li.RemoveAll(x => x.Product.Id == Id);
+            Session["cart"] = li;
+            Session["count"] = Convert.ToInt32(Session["count"]) - 1;
+            return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
 
     }

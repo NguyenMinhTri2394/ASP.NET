@@ -1,0 +1,159 @@
+﻿@model IEnumerable<QLBH_ASP.Models.CartModel>
+@{
+    ViewBag.Title = "Shopping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#removecart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = $("#productid").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $('#CartCount').text(@Session["count"] - 1);
+                    $("#product-" + model.Id).remove();
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col" width="120">Số lượng</th>
+                                <th scope="col" width="120">Giá</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr id="product-@item.Product.Id">
+                                        <td>
+                                            <figure class="itemside">
+                                                <div class="aside"><img src="~/Content/images/product/@item.Product.Avatar" class="img-sm"></div>
+                                                <figcaption class="info">
+                                                    <a href="#" class="title text-dark">@item.Product.Name</a>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <input type="text" value="@item.Quantity" />
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="price">@String.Format("{0:0,0}₫", item.Product.Price * item.Quantity)</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <input type="hidden" value="@item.Product.Id" id="productid" />
+                                            <a href="" class="btn btn-light" id="removecart"> Xóa sản phẩm</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                            <th scope="col">Không có sản phẩm nào trong giỏ hàng</th>
+                        }
+                            </tbody>
+                        </table>
+
+                        <div class="card-body border-top">
+                            <a href="@Url.Action("Index", "Payment")" class="btn btn-primary float-md-right"> Thanh toán <i class="fa fa-chevron-right"></i> </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a>
+                        </div>
+                    </div> <!-- card.// -->
+
+                    <div class="alert alert-success mt-3">
+                        <p class="icontext"><i class="icon text-success fa fa-truck"></i> Giao hàng miễn phí trong vòng 1-2 tuần</p>
+                    </div>
+
+                </main> <!-- col.// -->
+                <aside class="col-md-3">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label>Mã giảm giá</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="" placeholder="Nhập mã giảm giá">
+                                        <span class="input-group-append">
+                                            <button class="btn btn-primary">Áp dụng</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> <!-- card-body.// -->
+                    </div>  <!-- card .// -->
+                    <div class="card">
+                        <div class="card-body">
+                            <dl class="dlist-align">
+                                <dt>Thành tiền:</dt>
+                                <dd class="text-right h5" id="removecart">
+                                    <strong>@String.Format("{0:0,0}₫", Model?.Sum(item => item.Quantity * item.Product.Price) ?? 0)</strong>
+                                </dd>
+                            </dl>
+                            <hr>
+                            <p class="text-center mb-3">
+                                <img src="~/Content/images/misc/payments.png" height="26">
+                            </p>
+
+                        </div> <!-- card-body.// -->
+                    </div>  <!-- card .// -->
+                </aside> <!-- col.// -->
+            </div>
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    <!-- ========================= SECTION  ========================= -->
+    <section class="section-name border-top padding-y">
+        <div class="container">
+            <h6>Chính sách thanh toán và hoàn tiền</h6>
+            <p>
+                Chúng tôi cam kết cung cấp các phương thức thanh toán linh hoạt và an toàn để đáp ứng nhu cầu của khách hàng.
+                Quý khách có thể lựa chọn thanh toán qua chuyển khoản ngân hàng, thẻ tín dụng, thẻ ghi nợ, ví điện tử, hoặc
+                tiền mặt tại điểm giao dịch (nếu áp dụng). Tất cả các giao dịch thanh toán được xử lý thông qua hệ thống bảo
+                mật cao, đảm bảo thông tin của khách hàng luôn được giữ an toàn.Sau khi hoàn tất thanh toán, hệ thống sẽ gửi
+                thông báo xác nhận qua email hoặc tin nhắn SMS. Quý khách vui lòng kiểm tra thông tin để đảm bảo giao dịch thành
+                công. Nếu có bất kỳ vấn đề nào phát sinh, vui lòng liên hệ với bộ phận hỗ trợ khách hàng để được hỗ trợ kịp thời.
+                Chúng tôi không chịu trách nhiệm đối với các lỗi phát sinh từ việc cung cấp thông tin thanh toán không chính xác.
+                Quý khách vui lòng kiểm tra kỹ thông tin trước khi thực hiện giao dịch.
+            </p>
+            <p>
+                Chúng tôi cam kết thực hiện hoàn tiền trong trường hợp khách hàng không nhận được sản phẩm hoặc dịch vụ như cam
+                kết, hoặc phát sinh lỗi kỹ thuật không thể khắc phục từ phía nhà cung cấp. Yêu cầu hoàn tiền cần được gửi trong
+                vòng 7 ngày kể từ ngày giao dịch, kèm theo đầy đủ thông tin liên quan. Sau khi tiếp nhận, chúng tôi sẽ xác minh
+                và xử lý trong thời gian 5-7 ngày làm việc. Số tiền hoàn sẽ được chuyển lại qua phương thức thanh toán ban đầu.
+                Lưu ý, chính sách hoàn tiền không áp dụng đối với sản phẩm hoặc dịch vụ đã sử dụng một phần, hoặc khi khách hàngkhông tuân thủ các điều kiện quy định. Mọi thắc mắc, vui lòng liên hệ với bộ phận hỗ trợ để được giải đáp kịp
+                thời.
+            </p>
+
+        </div><!-- container // -->
+    </section>
+    <!-- ========================= SECTION  END// ========================= -->

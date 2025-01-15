@@ -18,6 +18,7 @@ namespace QLBH_ASP.Context
         public Product()
         {
             this.Orders = new HashSet<Order>();
+            this.Order_Detail = new HashSet<Order_Detail>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace QLBH_ASP.Context
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Detail> Order_Detail { get; set; }
     }
 }

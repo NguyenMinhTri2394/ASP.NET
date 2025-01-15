@@ -41,6 +41,7 @@
     <Property Name="Status" Type="Int32" />
     <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Order_Product" FromRole="Order" ToRole="Product" />
+    <NavigationProperty Name="Order_Detail" Relationship="WebsiteBanHangModel.FK__Order_Det__Order__73BA3083" FromRole="Order" ToRole="Order_Detail" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -65,6 +66,7 @@
     <NavigationProperty Name="Brand" Relationship="Self.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Product" FromRole="Product" ToRole="Order" />
+    <NavigationProperty Name="Order_Detail" Relationship="WebsiteBanHangModel.FK__Order_Det__Produ__74AE54BC" FromRole="Product" ToRole="Order_Detail" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -131,5 +133,59 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
+    <EntitySet Name="Order_Detail" EntityType="WebsiteBanHangModel.Order_Detail" />
+    <EntitySet Name="sysdiagrams" EntityType="WebsiteBanHangModel.sysdiagram" />
+    <AssociationSet Name="FK__Order_Det__Order__73BA3083" Association="WebsiteBanHangModel.FK__Order_Det__Order__73BA3083">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_Det__Produ__74AE54BC" Association="WebsiteBanHangModel.FK__Order_Det__Produ__74AE54BC">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Order_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="WebsiteBanHangModel.FK__Order_Det__Order__73BA3083" FromRole="Order_Detail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="WebsiteBanHangModel.FK__Order_Det__Produ__74AE54BC" FromRole="Order_Detail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Order_Det__Order__73BA3083">
+    <End Type="WebsiteBanHangModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="WebsiteBanHangModel.Order_Detail" Role="Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_Det__Produ__74AE54BC">
+    <End Type="WebsiteBanHangModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="WebsiteBanHangModel.Order_Detail" Role="Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
